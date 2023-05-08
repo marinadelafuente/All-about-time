@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coutdown</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div class="main-buttons">
+        <button class="button-24 active-button">Digital Clock 24h</button>
+        <button class="button-12">Digital Clock 12h</button>
+        <button class="button-timer">Countdown Timer</button>
+        <button class="button-christmas">Christmas Countdown</button>
+      </div>
+      <div class="container">
+        <div class="clock-container d-24">
+          <p class="clock"></p>
+        </div>
+        <div class="clock-container d-12 hidden">
+          <p class="clock12"></p>
+        </div>
+        <div class="countdown hidden">
+          <div class="countdown-container">
+            <form onsubmit="startCountdown()" onChange="validateStart()">
+              <div class="input-container">
+                <label for="hours">h</label>
+                <input placeholder="0" class="hours" type="number" id="hours" min="0" max="23" required />
+                <span>:</span>
+              </div>
+              <div class="input-container">
+                <label for="minutes">m</label>
+                <input placeholder="00" class="minutes" type="number" id="minutes" min="0" max="59" required />
+                <span>:</span>
+              </div>
+              <div class="input-container">
+                <label for="seconds">s</label>
+                <input placeholder="00" class="seconds" type="number" id="seconds" min="0" max="59" required />
+              </div>
+            </form>
+            <div class="output hidden"></div>
+          </div>
+          <div class="buttons">
+            <button disabled class="start timer-button" onclick="startCountdown()">Start</button>
+            <button class="pause hidden timer-button" onclick="pauseCountdown()">Pause</button>
+            <button class="reset hidden timer-button" onclick="resetCountdown()">Reset</button>
+          </div>
+        </div>
+        <div class="christmas-countdown hidden">
+          <!-- <h1>Countdown until Christmas Day</h1> -->
+          <p>
+            <span class="ch-days"></span>
+            <span class="ch-hours"></span>
+            <span class="ch-minutes"></span>
+            <span class="ch-seconds"></span>
+          </p>
+          <div class="d-day hidden"><p>Merry Christmas</p></div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="./app.js"></script>
+  </body>
+</html>

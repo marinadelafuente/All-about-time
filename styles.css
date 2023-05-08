@@ -1,0 +1,242 @@
+root,
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  overflow: auto;
+  font-family: Helvetica, sans-serif;
+  width: 100%;
+  height: 100%;
+  background: black;
+}
+
+/* button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+} */
+
+#app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 80px;
+  margin-bottom: 50px;
+  width: 100%;
+  @media screen and (min-width: 480px) {
+    flex-direction: row;
+    gap: 25px;
+    margin-top: 150px;
+    margin-bottom: 100px;
+  }
+}
+
+.main-buttons button {
+  width: 105px;
+  height: 50px;
+  border-radius: 8px;
+  font-size: 14px;
+  box-shadow: 0px 1px 0px 1px #9d77e1;
+  @media screen and (min-width: 768px) {
+    width: 135px;
+    font-size: 15px;
+  }
+}
+
+.main-buttons button:hover {
+  box-shadow: 0px 1px 0px 1px #9d77e1;
+}
+
+.active-button {
+  background: #2c0c76;
+  color: white;
+  box-shadow: 0px 1px 0px 1px #9d77e1;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* --------- Digital Clocks --------- */
+.clock-container {
+  display: flex;
+  gap: 10px;
+  color: white;
+  font-size: 40px;
+  border: 5px solid #f4810b;
+  border-radius: 20px;
+  width: 268px;
+  padding: 40px 0;
+}
+
+.clock-container p {
+  margin: 0 auto;
+}
+
+/* --------- Countdown --------- */
+.countdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.countdown-container {
+  background-color: #f4810b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  color: white;
+  box-shadow: 0 4px #744d24;
+}
+
+.output {
+  font-size: 40px;
+  margin-bottom: 6px;
+}
+
+.buttons {
+  display: flex;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.timer-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border: 1px solid grey;
+  font-size: 16px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.2s all;
+  width: 85px;
+  height: 85px;
+  border: none;
+}
+
+button:hover:not([disabled]) {
+  transform: translateY(4px);
+  transform: scale(0.98);
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
+button:active {
+  transform: translateY(4px);
+  box-shadow: 0 5px gray;
+  transform: scale(0.98);
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
+button:disabled {
+  background-color: #80808078;
+  color: white;
+  padding: 15px;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.5;
+}
+
+.start {
+  width: 105px;
+  height: 50px;
+  border-radius: 8px;
+  margin-top: 10px;
+  box-shadow: 0 0 10px 1px #eee5db;
+}
+
+.reset {
+  background: grey;
+  color: white;
+}
+
+.input-container {
+  display: flex;
+  gap: 2px;
+}
+
+form {
+  display: flex;
+  gap: 10px;
+  font-size: 20px;
+}
+
+input {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 21px;
+  padding: 0 0 0 1px;
+}
+
+::placeholder {
+  color: black;
+  opacity: 1;
+  background: white;
+  padding: 0 1px;
+  font-size: 20px;
+}
+
+.heading {
+  color: white;
+  margin-bottom: 40px;
+}
+
+/* --------- Chritsmas Countdown --------- */
+.christmas-countdown {
+  color: white;
+  margin: 50px;
+  border-radius: 10px;
+  -webkit-animation: glow 2s ease-in-out infinite alternate;
+  -moz-animation: glow 2s ease-in-out infinite alternate;
+  animation: glow 2s ease-in-out infinite alternate;
+  @media screen and (min-width: 768px) {
+    margin: 50px 50px 50px -50px;
+  }
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #575050, 0 0 20px #575050, 0 0 30px #00bcd4, 0 0 40px #00bcd4, 0 0 50px #00bcd4, 0 0 60px #00bcd4, 0 0 70px #00bcd4;
+  }
+  to {
+    text-shadow: 0 0 20px #575050, 0 0 30px #9a04f8, 0 0 40px #9a04f8, 0 0 50px #9a04f8, 0 0 60px #9a04f8, 0 0 70px #9a04f8, 0 0 80px #9a04f8;
+  }
+}
+
+.christmas-countdown p {
+  font-size: 20px;
+  @media screen and (min-width: 480px) {
+    font-size: 30px;
+  }
+}
+
+.christmas {
+  background-image: url("./assets/christmas-tree.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.hidden {
+  display: none;
+}
