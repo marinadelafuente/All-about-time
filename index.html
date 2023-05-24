@@ -10,13 +10,19 @@
   <body>
     <div id="app">
       <div class="main-buttons">
-        <button class="button-24 active-button">Digital Clock 24h</button>
+        <button class="button-analog active-button">Analog Clock</button>
+        <button class="button-24">Digital Clock 24h</button>
         <button class="button-12">Digital Clock 12h</button>
         <button class="button-timer">Countdown Timer</button>
         <button class="button-christmas">Christmas Countdown</button>
       </div>
       <div class="container">
-        <div class="clock-container d-24">
+        <div class="analog">
+          <div class="hand second"></div>
+          <div class="hand minute"></div>
+          <div class="hand hour"></div>
+        </div>
+        <div class="clock-container d-24 hidden">
           <p class="clock"></p>
         </div>
         <div class="clock-container d-12 hidden">

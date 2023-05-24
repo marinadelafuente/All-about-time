@@ -11,17 +11,9 @@ body {
   height: 100%;
   background: black;
 }
-
-/* button,
-input,
-optgroup,
-select,
-textarea {
-  font-family: inherit;
-  font-size: 100%;
-  line-height: 1.15;
-  margin: 0;
-} */
+button {
+  cursor: pointer;
+}
 
 #app {
   display: flex;
@@ -73,6 +65,68 @@ textarea {
   flex-direction: column;
   align-items: center;
 }
+
+/* --------- Analog Clock --------- */
+.analog {
+  width: 300px;
+  height: 300px;
+  background-color: black;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border: 2px solid #9d77e1;
+  margin-bottom: 10px;
+  background: #2c0c76;
+  box-shadow: 0 0 30px 10px #575050;
+}
+
+.hand {
+  width: 5px;
+  height: 20%;
+  background-color: #f4810b;
+  position: absolute;
+  transform-origin: center bottom;
+  top: 30%;
+  border-radius: 4px;
+}
+
+.minute {
+  width: 3px;
+  height: 30%;
+  top: 20%;
+}
+
+.second {
+  width: 2px;
+  height: 40%;
+  background-color: white;
+  top: 10%;
+}
+
+.number {
+  position: absolute;
+  height: 90%;
+  animation: color 6s infinite;
+  font-size: 20px;
+}
+
+@keyframes color {
+  0% {
+    color: pink;
+  }
+  25% {
+    color: yellow;
+  }
+  50% {
+    color: #3ac8bc;
+  }
+  100% {
+    color: orange;
+  }
+}
+
 /* --------- Digital Clocks --------- */
 .clock-container {
   display: flex;
@@ -142,8 +196,6 @@ button:hover:not([disabled]) {
 }
 
 button:active {
-  transform: translateY(4px);
-  box-shadow: 0 5px gray;
   transform: scale(0.98);
   box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
 }

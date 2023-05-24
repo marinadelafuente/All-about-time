@@ -1,23 +1,25 @@
 // Form
 const form = document.querySelector("form");
 
-// Inputs
+// Inputs Countdown
 let hoursInput = document.querySelector(".hours");
 let minutesInput = document.querySelector(".minutes");
 let secondsInput = document.querySelector(".seconds");
 
-// Timer
+// Time
 const output = document.querySelector(".output");
 const clock = document.querySelector(".clock");
 const clock12 = document.querySelector(".clock12");
 
 // Elements to show and hide
+const analog = document.querySelector(".analog");
 const d12 = document.querySelector(".d-12");
 const d24 = document.querySelector(".d-24");
 const counter = document.querySelector(".countdown");
 const christmasCountdown = document.querySelector(".christmas-countdown");
 
 // Buttons
+const analogButton = document.querySelector(".button-analog");
 const d12Button = document.querySelector(".button-12");
 const d24Button = document.querySelector(".button-24");
 const countdownButton = document.querySelector(".button-timer");
@@ -26,7 +28,7 @@ const startButton = document.querySelector(".start");
 const pauseButton = document.querySelector(".pause");
 const resetButton = document.querySelector(".reset");
 
-const mainButtons = [d12Button, d24Button, countdownButton, christmasButton];
+const mainButtons = [analogButton, d12Button, d24Button, countdownButton, christmasButton];
 let totalSeconds = 0;
 let countdown = 0;
 let hours = 0;
@@ -34,7 +36,33 @@ let minutes = 0;
 let seconds = 0;
 let paused = false;
 
-// **Digital Clocks
+/** ----------------- Analog Clock ---------------- */
+
+const marks = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+let rotationDeg = 0;
+marks.map((mark) => {
+  analog.innerHTML += `<div class="number" style="transform: rotate(${rotationDeg}deg)"><div style="transform: rotate(${-rotationDeg}deg)">${mark}</div></div>`;
+  rotationDeg += 30;
+});
+
+let secondHand = document.querySelector(".second");
+let minuteHand = document.querySelector(".minute");
+let hourHand = document.querySelector(".hour");
+
+function moveAnalogTime() {
+  console.log("gg");
+  const now = new Date();
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const seconds = now.getSeconds();
+  secondHand.style.transform = `rotate(${seconds * (360 / 60)}deg)`;
+  minuteHand.style.transform = `rotate(${minutes * (360 / 60)}deg)`;
+  hourHand.style.transform = `rotate(${hours * (360 / 12)}deg)`;
+}
+
+setInterval(moveAnalogTime, 1000);
+
+/** ----------------- Digital Clocks --------------- */
 
 // Get the current time
 const getTime = () => {
@@ -52,15 +80,13 @@ const getTime = () => {
   if (hh === 0) hh = 12;
   if (hh > 12) hh = hh - 12;
 
-  // Add a 0 before the hours, minutes and seconds when they are a single digit
-  hh = hh >= 10 ? hh : `0${hh}`;
-  h = h >= 10 ? h : `0${h}`;
-  m = m >= 10 ? m : `0${m}`;
-  s = s >= 10 ? s : `0${s}`;
+  function addZero(value) {
+    return value < 10 ? `0${value}` : value;
+  }
 
   // Show the time in the browser
-  clock.innerHTML = h + ":" + m + ":" + s + " ";
-  clock12.innerHTML = hh + ":" + m + ":" + s + " " + session;
+  clock.innerHTML = addZero(h) + ":" + addZero(m) + ":" + addZero(s) + " ";
+  clock12.innerHTML = addZero(hh) + ":" + addZero(m) + ":" + addZero(s) + " " + session;
 
   // Call this function every 1 seconds
   setTimeout(getTime, 1000);
@@ -68,7 +94,10 @@ const getTime = () => {
 
 getTime();
 
-// **Countdown
+/** ----------------- Countdown --------------- */
+function showTimer(hours, minutes, seconds) {
+  output.textContent = `${parseInt(hours)}h : ${parseInt(minutes)}m : ${parseInt(seconds)}s `;
+}
 const startCountdown = (ev) => {
   if (!paused) {
     hours = hoursInput.value ? hoursInput.value : "0";
@@ -77,22 +106,21 @@ const startCountdown = (ev) => {
     manageUI();
   }
 
-  output.innerHTML = hours + "h " + minutes + "m " + seconds + "s";
+  showTimer(hours, minutes, seconds);
   totalSeconds = parseInt(hours) * 60 * 60 + parseInt(minutes) * 60 + parseInt(seconds);
-  //   timer();
   countdown = setInterval(() => {
-    timer();
+    moveTime();
   }, 1000);
 };
 
-const timer = () => {
+const moveTime = () => {
   totalSeconds--;
   hours = Math.floor(totalSeconds / (60 * 60));
   // We get the number of seconds in an hour, then we convert them to minutes and then we substract this amount to the number of minutes in the total seconds
   minutes = Math.floor((totalSeconds % 3600) / 60);
   seconds = totalSeconds % 60;
 
-  output.innerHTML = hours + "h " + minutes + "m " + seconds + "s";
+  showTimer(hours, minutes, seconds);
   if (totalSeconds < 0) {
     clearInterval(countdown);
     setTimeout(resetCountdown, 500);
@@ -126,13 +154,12 @@ const resetCountdown = () => {
   manageUI();
   startButton.setAttribute("disabled", "disabled");
 };
-
 // Enable the start button once at least one of the inputs have changed
 const validateStart = () => {
   startButton.removeAttribute("disabled");
 };
 
-// **Countdown Till Christmas
+/** ----------------- Countdown Till Christmas --------------- */
 
 function getDaysUntilChristmas() {
   const today = new Date();
@@ -177,10 +204,11 @@ function getDaysUntilChristmas() {
 
 getDaysUntilChristmas();
 
-// **Show Different Clock Elements
+/** ----------------- Show different time elements --------------- */
+
 const showClock = (ev) => {
   // Add hidden class to all hideable elements
-  [d12, d24, counter, christmasCountdown].forEach((element) => {
+  [analog, d12, d24, counter, christmasCountdown].forEach((element) => {
     return element.classList.add("hidden");
   });
 
@@ -195,6 +223,8 @@ const showClock = (ev) => {
   const className = ev.target.classList;
   document.querySelector("body").classList.remove("christmas");
   switch (true) {
+    case className.contains("button-analog"):
+      return analog.classList.remove("hidden");
     case className.contains("button-12"):
       return d12.classList.remove("hidden");
     case className.contains("button-24"):
